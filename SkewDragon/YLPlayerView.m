@@ -150,7 +150,6 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 		
 		// Copy the pixel buffer to be displayed next and add it to AVSampleBufferDisplayLayer for display
 		CVPixelBufferRef pixBuff = [playerItemVideoOutput copyPixelBufferForItemTime: outputItemTime itemTimeForDisplay: NULL];
-		
 		[self displayPixelBuffer: pixBuff atTime: outputItemTime];
 		
 		CVBufferRelease(pixBuff);
