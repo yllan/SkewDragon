@@ -36,7 +36,11 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="17" id="5bn-vg-S8R"/>
                         </constraints>
-                        <sliderCell key="cell" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="cu3-h5-q7v" customClass="YLTimeSliderCell"/>
+                        <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="cu3-h5-q7v" customClass="YLTimeSliderCell"/>
+                        <connections>
+                            <binding destination="-2" name="maxValue" keyPath="duration" id="RzS-hR-ivD"/>
+                            <binding destination="-2" name="value" keyPath="currentTime" previousBinding="RzS-hR-ivD" id="yrP-ao-nop"/>
+                        </connections>
                     </slider>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gyy-E9-3Sm">
                         <rect key="frame" x="4" y="3" width="87" height="32"/>
@@ -71,5 +75,6 @@
             </connections>
         </window>
         <customObject id="-3" userLabel="Application"/>
+        <userDefaultsController representsSharedInstance="YES" id="5GU-Z8-6qJ"/>
     </objects>
 </document>

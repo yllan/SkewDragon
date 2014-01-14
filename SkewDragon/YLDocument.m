@@ -229,12 +229,12 @@ NSString* const YLMouseUpNotification = @"YLMouseUpNotification";
 	
 	[_player setRate:([_player rate] == 0.0f ? 1.0f : 0.0f)];
 	
-	[(NSButton *)sender setTitle:([_player rate] == 0.0f ? @"Play" : @"Pause")];
+	[(NSButton *)sender setTitle: ([_player rate] == 0.0f ? @"Play" : @"Pause")];
 }
 
 #pragma mark - Player View Delegate
 - (void) displayPixelBuffer: (CVPixelBufferRef)pixelBuffer atTime: (CMTime)outputTime
 {
-    
+
 }
 @end
