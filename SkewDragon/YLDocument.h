@@ -7,7 +7,19 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "YLPlayerView.h"
 
-@interface YLDocument : NSDocument
+@class YLTimeSlider;
+
+@interface YLDocument : NSDocument <YLPlayerViewDelegate>
+
+@property (nonatomic, assign) IBOutlet YLPlayerView *playerView;
+@property (nonatomic, assign) IBOutlet NSButton *playPauseButton;
+@property (nonatomic, assign) IBOutlet YLTimeSlider *currentTimeSlider;
+
+@property double currentTime;
+@property (readonly) double duration;
+
+- (IBAction) togglePlayPause: (id)sender;
 
 @end

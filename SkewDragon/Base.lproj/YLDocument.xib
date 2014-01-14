@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4439" systemVersion="13A451" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13B3116" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4439"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="YLDocument">
             <connections>
+                <outlet property="currentTimeSlider" destination="yR9-Xh-zQM" id="SBu-IT-aVh"/>
+                <outlet property="playPauseButton" destination="gyy-E9-3Sm" id="LfY-4J-Ybc"/>
+                <outlet property="playerView" destination="Edb-Ht-GVE" id="SYu-n7-8cT"/>
                 <outlet property="window" destination="5" id="18"/>
             </connections>
         </customObject>
@@ -20,19 +23,47 @@
                 <rect key="frame" x="0.0" y="0.0" width="507" height="413"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="20">
-                        <rect key="frame" x="120" y="195" width="266" height="22"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Your document contents here" id="100020">
-                            <font key="font" metaFont="system" size="18"/>
-                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
+                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="Edb-Ht-GVE" customClass="YLPlayerView">
+                        <rect key="frame" x="0.0" y="40" width="507" height="373"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <connections>
+                            <outlet property="delegate" destination="-2" id="eMg-Ab-Y0B"/>
+                        </connections>
+                    </customView>
+                    <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yR9-Xh-zQM" customClass="YLTimeSlider">
+                        <rect key="frame" x="98" y="8" width="391" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="17" id="5bn-vg-S8R"/>
+                        </constraints>
+                        <sliderCell key="cell" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="cu3-h5-q7v" customClass="YLTimeSliderCell"/>
+                    </slider>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gyy-E9-3Sm">
+                        <rect key="frame" x="4" y="3" width="87" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="75" id="HOO-iy-1ss"/>
+                            <constraint firstAttribute="height" constant="21" id="fFr-20-U3H"/>
+                        </constraints>
+                        <buttonCell key="cell" type="push" title="Play" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="2OO-FP-k6u">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="togglePlayPause:" target="-2" id="kro-9b-1QE"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="20" firstAttribute="centerX" secondItem="6" secondAttribute="centerX" id="100025"/>
-                    <constraint firstItem="20" firstAttribute="centerY" secondItem="6" secondAttribute="centerY" id="100026"/>
+                    <constraint firstItem="Edb-Ht-GVE" firstAttribute="leading" secondItem="6" secondAttribute="leading" id="5Xf-iL-l1a"/>
+                    <constraint firstAttribute="trailing" secondItem="Edb-Ht-GVE" secondAttribute="trailing" id="7df-kf-kdM"/>
+                    <constraint firstItem="gyy-E9-3Sm" firstAttribute="leading" secondItem="6" secondAttribute="leading" constant="10" id="9jS-VN-ERX"/>
+                    <constraint firstItem="gyy-E9-3Sm" firstAttribute="top" secondItem="Edb-Ht-GVE" secondAttribute="bottom" constant="9" id="B86-iU-PYS"/>
+                    <constraint firstItem="yR9-Xh-zQM" firstAttribute="leading" secondItem="gyy-E9-3Sm" secondAttribute="trailing" constant="15" id="CWm-J6-gnm"/>
+                    <constraint firstAttribute="bottom" secondItem="yR9-Xh-zQM" secondAttribute="bottom" constant="10" id="IlT-yp-ctC"/>
+                    <constraint firstAttribute="bottom" secondItem="gyy-E9-3Sm" secondAttribute="bottom" constant="10" id="Wol-xF-a06"/>
+                    <constraint firstAttribute="trailing" secondItem="yR9-Xh-zQM" secondAttribute="trailing" constant="20" id="hU2-av-ab8"/>
+                    <constraint firstItem="Edb-Ht-GVE" firstAttribute="top" secondItem="6" secondAttribute="top" id="xqW-s2-Elf"/>
                 </constraints>
             </view>
             <connections>
