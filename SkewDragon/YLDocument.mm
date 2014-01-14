@@ -7,11 +7,7 @@
 //
 
 #import "YLDocument.h"
-@import AVFoundation.AVBase;
-@import AVFoundation.AVPlayer;
-@import AVFoundation.AVAsset;
-@import AVFoundation.AVMediaFormat;
-@import AVFoundation.AVAssetTrack;
+#import <AVFoundation/AVFoundation.h>
 
 static void *YLPlayerItemStatusContext = &YLPlayerItemStatusContext;
 NSString* const YLMouseDownNotification = @"YLMouseDownNotification";
@@ -56,6 +52,10 @@ NSString* const YLMouseUpNotification = @"YLMouseUpNotification";
 	float _playRateToRestore;
 	id _observer;
 }
+@property (nonatomic, strong) CIDetector *detector;
+
+@property (nonatomic, strong) NSSet *displayingFaceIDs;
+
 @end
 
 @implementation YLDocument
@@ -66,6 +66,7 @@ NSString* const YLMouseUpNotification = @"YLMouseUpNotification";
     if (self) {
         _player = [[AVPlayer alloc] init];
         [self addTimeObserverToPlayer];
+        self.detector = [CIDetector detectorOfType: CIDetectorTypeFace context: nil options: @{CIDetectorAccuracy: CIDetectorAccuracyHigh, CIDetectorTracking: @YES}];
     }
     return self;
 }
@@ -235,6 +236,58 @@ NSString* const YLMouseUpNotification = @"YLMouseUpNotification";
 #pragma mark - Player View Delegate
 - (void) displayPixelBuffer: (CVPixelBufferRef)pixelBuffer atTime: (CMTime)outputTime
 {
+    @autoreleasepool {
+        CIImage *image = [[CIImage alloc] initWithCVImageBuffer: pixelBuffer];
+        NSArray *features = [self.detector featuresInImage: image];
 
+        NSMutableSet *newFaceIDs = [NSMutableSet set];
+        NSMutableSet *existingFaceIDs = [NSMutableSet set];
+        NSMutableSet *disappearedFaceIDs = [self.displayingFaceIDs mutableCopy];
+
+        /* Classify the faces' state */
+        for (CIFaceFeature *f in features) {
+            if (f.trackingFrameCount == 1) {
+                [newFaceIDs addObject: @(f.trackingID)];
+            } else {
+                [existingFaceIDs addObject: @(f.trackingID)];
+            }
+            [disappearedFaceIDs removeObject: @(f.trackingID)];
+        }
+        self.displayingFaceIDs = [[existingFaceIDs copy] setByAddingObjectsFromSet: newFaceIDs];
+        
+        image = nil;
+        [CATransaction begin];
+        [CATransaction setValue:(id)kCFBooleanTrue forKey: kCATransactionDisableActions];
+        
+        NSArray *sublayers = [self.playerView.layer sublayers];
+        NSMutableArray *faceLayers = [NSMutableArray array];
+        for (CALayer *faceLayer in sublayers)
+            if ([faceLayer.name isEqualToString: @"FaceLayer"]) {
+                [faceLayers addObject: faceLayer];
+                faceLayer.hidden = YES;
+            }
+        
+        if (features.count > 0) {
+            NSInteger sublayersCount = [faceLayers count], currentSublayer = 0;
+            for (NSUInteger idx = sublayersCount; idx < features.count; idx++) {
+                CALayer *layer = [CALayer layer];
+                layer.name = @"FaceLayer";
+                layer.borderColor = [NSColor redColor].CGColor;
+                layer.borderWidth = 1;
+//                layer.contents = self.faceImage;
+                
+                [self.playerView.layer addSublayer: layer];
+                [faceLayers addObject: layer];
+            }
+            
+            for (CIFaceFeature *f in features) {
+                CALayer *faceLayer = [faceLayers objectAtIndex: currentSublayer++];
+                faceLayer.frame = f.bounds;
+                faceLayer.hidden = NO;
+                
+            }
+        }
+        [CATransaction commit];
+    }
 }
 @end

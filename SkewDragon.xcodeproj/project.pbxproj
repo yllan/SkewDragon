@@ -11,7 +11,7 @@
 		8531ED031885823300CDDBD2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8531ED011885823300CDDBD2 /* InfoPlist.strings */; };
 		8531ED051885823300CDDBD2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8531ED041885823300CDDBD2 /* main.m */; };
 		8531ED091885823300CDDBD2 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 8531ED071885823300CDDBD2 /* Credits.rtf */; };
-		8531ED0C1885823300CDDBD2 /* YLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 8531ED0B1885823300CDDBD2 /* YLDocument.m */; };
+		8531ED0C1885823300CDDBD2 /* YLDocument.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8531ED0B1885823300CDDBD2 /* YLDocument.mm */; };
 		8531ED0F1885823300CDDBD2 /* YLDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8531ED0D1885823300CDDBD2 /* YLDocument.xib */; };
 		8531ED121885823300CDDBD2 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8531ED101885823300CDDBD2 /* MainMenu.xib */; };
 		8531ED141885823300CDDBD2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8531ED131885823300CDDBD2 /* Images.xcassets */; };
@@ -45,7 +45,7 @@
 		8531ED061885823300CDDBD2 /* SkewDragon-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SkewDragon-Prefix.pch"; sourceTree = "<group>"; };
 		8531ED081885823300CDDBD2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		8531ED0A1885823300CDDBD2 /* YLDocument.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YLDocument.h; sourceTree = "<group>"; };
-		8531ED0B1885823300CDDBD2 /* YLDocument.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YLDocument.m; sourceTree = "<group>"; };
+		8531ED0B1885823300CDDBD2 /* YLDocument.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = YLDocument.mm; sourceTree = "<group>"; };
 		8531ED0E1885823300CDDBD2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/YLDocument.xib; sourceTree = "<group>"; };
 		8531ED111885823300CDDBD2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		8531ED131885823300CDDBD2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -126,7 +126,7 @@
 				85EDA83C18859B68009F690C /* YLAppDelegate.h */,
 				85EDA83D18859B68009F690C /* YLAppDelegate.m */,
 				8531ED0A1885823300CDDBD2 /* YLDocument.h */,
-				8531ED0B1885823300CDDBD2 /* YLDocument.m */,
+				8531ED0B1885823300CDDBD2 /* YLDocument.mm */,
 				8531ED2F188582DD00CDDBD2 /* YLPlayerView.h */,
 				8531ED30188582DD00CDDBD2 /* YLPlayerView.m */,
 				8531ED101885823300CDDBD2 /* MainMenu.xib */,
@@ -269,7 +269,7 @@
 			files = (
 				8531ED31188582DD00CDDBD2 /* YLPlayerView.m in Sources */,
 				8531ED051885823300CDDBD2 /* main.m in Sources */,
-				8531ED0C1885823300CDDBD2 /* YLDocument.m in Sources */,
+				8531ED0C1885823300CDDBD2 /* YLDocument.mm in Sources */,
 				85EDA83E18859B68009F690C /* YLAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

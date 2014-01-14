@@ -7,9 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
-@import AVFoundation.AVPlayerItem;
-@import AVFoundation.AVSampleBufferDisplayLayer;
-@import QuartzCore.QuartzCore;
+#import <AVFoundation/AVFoundation.h>
+#import <QuartzCore/QuartzCore.h>
 
 @protocol YLPlayerViewDelegate <NSObject>
 - (void) displayPixelBuffer: (CVPixelBufferRef)pixelBuffer atTime: (CMTime)outputTime;
