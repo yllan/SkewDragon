@@ -102,11 +102,6 @@ NSString* const YLMouseUpNotification = @"YLMouseUpNotification";
     [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(endScrubbing:) name: YLMouseUpNotification object: self.currentTimeSlider.cell];
 }
 
-+ (BOOL)autosavesInPlace
-{
-    return YES;
-}
-
 - (void) close
 {
     self.playerView = nil;
