@@ -10,6 +10,8 @@
 @import AVFoundation.AVBase;
 @import AVFoundation.AVPlayer;
 @import AVFoundation.AVAsset;
+@import AVFoundation.AVMediaFormat;
+@import AVFoundation.AVAssetTrack;
 
 static void *YLPlayerItemStatusContext = &YLPlayerItemStatusContext;
 NSString* const YLMouseDownNotification = @"YLMouseDownNotification";
@@ -92,9 +94,16 @@ NSString* const YLMouseUpNotification = @"YLMouseUpNotification";
 {
     _currentPlayerItem = [_player currentItem];
 	self.playerView.playerItem = _currentPlayerItem;
+ 
+    AVAsset *asset = _currentPlayerItem.asset;
+    AVAssetTrack *videoTrack = [[asset tracksWithMediaType: AVMediaTypeVideo] firstObject];
+    CGSize size = videoTrack.naturalSize;
+    size.height += 62;
+    [aController.window setFrame: NSMakeRect(0, 0, size.width, size.height) display: YES];
+    [aController.window center];
     
 	[self.currentTimeSlider setDoubleValue: 0.0];
-	
+    
 	[self addObserver: self forKeyPath: @"self.player.currentItem.status" options: NSKeyValueObservingOptionNew context: YLPlayerItemStatusContext];
     
     [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(playerItemDidPlayToEndTime:) name: AVPlayerItemDidPlayToEndTimeNotification object: _currentPlayerItem];
@@ -115,7 +124,7 @@ NSString* const YLMouseUpNotification = @"YLMouseUpNotification";
 {
 	AVPlayerItem *playerItem = [AVPlayerItem playerItemWithURL: url];
 	if (playerItem) {
-		[_player replaceCurrentItemWithPlayerItem:playerItem];
+		[_player replaceCurrentItemWithPlayerItem: playerItem];
 		return YES;
 	}
 	return NO;
