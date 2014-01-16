@@ -16,6 +16,9 @@
         CGFloat eyeRadii = 12;
         
         self.textLayer = [CATextLayer layer];
+        self.textLayer.position = CGPointZero;
+        self.textLayer.foregroundColor = [NSColor greenColor].CGColor;
+        
         self.leftEyeLayer = [CALayer layer];
         self.leftEyeLayer.borderColor = [NSColor yellowColor].CGColor;
         self.leftEyeLayer.borderWidth = 1;
@@ -29,6 +32,10 @@
         self.rightEyeLayer.cornerRadius = eyeRadii / 2;
         
         self.mouthLayer = [CALayer layer];
+        self.mouthLayer.borderColor = [NSColor orangeColor].CGColor;
+        self.mouthLayer.borderWidth = 1;
+        self.mouthLayer.bounds = CGRectMake(0, 0, eyeRadii, eyeRadii);
+        self.mouthLayer.cornerRadius = eyeRadii / 2;
         
         [self addSublayer: self.leftEyeLayer];
         [self addSublayer: self.rightEyeLayer];

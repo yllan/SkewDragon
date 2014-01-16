@@ -285,14 +285,18 @@ NSString* const YLMouseUpNotification = @"YLMouseUpNotification";
                 YLFaceLayer *faceLayer = [faceLayers objectAtIndex: currentSublayer++];
                 faceLayer.frame = f.bounds;
                 faceLayer.leftEyeLayer.hidden = !f.hasLeftEyePosition;
-                if (f.hasLeftEyePosition) {
+                faceLayer.rightEyeLayer.hidden = !f.hasRightEyePosition;
+                faceLayer.mouthLayer.hidden = !f.hasMouthPosition;
+
+                if (f.hasLeftEyePosition)
                     faceLayer.leftEyeLayer.position = CGPointMake(f.leftEyePosition.x - f.bounds.origin.x, f.leftEyePosition.y - f.bounds.origin.y);
-                }
-
-                if (f.hasRightEyePosition) {
+                if (f.hasRightEyePosition)
                     faceLayer.rightEyeLayer.position = CGPointMake(f.rightEyePosition.x - f.bounds.origin.x, f.rightEyePosition.y - f.bounds.origin.y);
-                }
+                if (f.hasMouthPosition)
+                    faceLayer.mouthLayer.position = CGPointMake(f.mouthPosition.x - f.bounds.origin.x, f.mouthPosition.y - f.bounds.origin.y);
 
+                faceLayer.textLayer.string = [NSString stringWithFormat: @"ID: %d:%d", f.trackingID, f.trackingFrameCount];
+                faceLayer.textLayer.bounds = faceLayer.bounds;
                 faceLayer.hidden = NO;
                 
             }
