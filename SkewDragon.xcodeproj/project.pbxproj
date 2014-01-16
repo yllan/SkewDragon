@@ -20,6 +20,7 @@
 		8531ED241885823300CDDBD2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8531ED221885823300CDDBD2 /* InfoPlist.strings */; };
 		8531ED261885823300CDDBD2 /* SkewDragonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8531ED251885823300CDDBD2 /* SkewDragonTests.m */; };
 		8531ED31188582DD00CDDBD2 /* YLPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8531ED30188582DD00CDDBD2 /* YLPlayerView.m */; };
+		858F252C1887812600C9BC20 /* YLFaceLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 858F252B1887812600C9BC20 /* YLFaceLayer.m */; };
 		85EDA83E18859B68009F690C /* YLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 85EDA83D18859B68009F690C /* YLAppDelegate.m */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +57,8 @@
 		8531ED251885823300CDDBD2 /* SkewDragonTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SkewDragonTests.m; sourceTree = "<group>"; };
 		8531ED2F188582DD00CDDBD2 /* YLPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLPlayerView.h; sourceTree = "<group>"; };
 		8531ED30188582DD00CDDBD2 /* YLPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLPlayerView.m; sourceTree = "<group>"; };
+		858F252A1887812600C9BC20 /* YLFaceLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLFaceLayer.h; sourceTree = "<group>"; };
+		858F252B1887812600C9BC20 /* YLFaceLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLFaceLayer.m; sourceTree = "<group>"; };
 		85EDA83C18859B68009F690C /* YLAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLAppDelegate.h; sourceTree = "<group>"; };
 		85EDA83D18859B68009F690C /* YLAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLAppDelegate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -129,6 +132,8 @@
 				8531ED0B1885823300CDDBD2 /* YLDocument.mm */,
 				8531ED2F188582DD00CDDBD2 /* YLPlayerView.h */,
 				8531ED30188582DD00CDDBD2 /* YLPlayerView.m */,
+				858F252A1887812600C9BC20 /* YLFaceLayer.h */,
+				858F252B1887812600C9BC20 /* YLFaceLayer.m */,
 				8531ED101885823300CDDBD2 /* MainMenu.xib */,
 				8531ED0D1885823300CDDBD2 /* YLDocument.xib */,
 				8531ED131885823300CDDBD2 /* Images.xcassets */,
@@ -271,6 +276,7 @@
 				8531ED051885823300CDDBD2 /* main.m in Sources */,
 				8531ED0C1885823300CDDBD2 /* YLDocument.mm in Sources */,
 				85EDA83E18859B68009F690C /* YLAppDelegate.m in Sources */,
+				858F252C1887812600C9BC20 /* YLFaceLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

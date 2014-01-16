@@ -8,6 +8,7 @@
 
 #import "YLDocument.h"
 #import <AVFoundation/AVFoundation.h>
+#import "YLFaceLayer.h"
 
 static void *YLPlayerItemStatusContext = &YLPlayerItemStatusContext;
 NSString* const YLMouseDownNotification = @"YLMouseDownNotification";
@@ -55,7 +56,6 @@ NSString* const YLMouseUpNotification = @"YLMouseUpNotification";
 @property (nonatomic, strong) CIDetector *detector;
 
 @property (nonatomic, strong) NSSet *displayingFaceIDs;
-
 @end
 
 @implementation YLDocument
@@ -261,16 +261,17 @@ NSString* const YLMouseUpNotification = @"YLMouseUpNotification";
         
         NSArray *sublayers = [self.playerView.layer sublayers];
         NSMutableArray *faceLayers = [NSMutableArray array];
-        for (CALayer *faceLayer in sublayers)
+
+        for (YLFaceLayer *faceLayer in sublayers)
             if ([faceLayer.name isEqualToString: @"FaceLayer"]) {
                 [faceLayers addObject: faceLayer];
                 faceLayer.hidden = YES;
             }
-        
+
         if (features.count > 0) {
             NSInteger sublayersCount = [faceLayers count], currentSublayer = 0;
             for (NSUInteger idx = sublayersCount; idx < features.count; idx++) {
-                CALayer *layer = [CALayer layer];
+                YLFaceLayer *layer = [YLFaceLayer layer];
                 layer.name = @"FaceLayer";
                 layer.borderColor = [NSColor redColor].CGColor;
                 layer.borderWidth = 1;
@@ -281,8 +282,17 @@ NSString* const YLMouseUpNotification = @"YLMouseUpNotification";
             }
             
             for (CIFaceFeature *f in features) {
-                CALayer *faceLayer = [faceLayers objectAtIndex: currentSublayer++];
+                YLFaceLayer *faceLayer = [faceLayers objectAtIndex: currentSublayer++];
                 faceLayer.frame = f.bounds;
+                faceLayer.leftEyeLayer.hidden = !f.hasLeftEyePosition;
+                if (f.hasLeftEyePosition) {
+                    faceLayer.leftEyeLayer.position = CGPointMake(f.leftEyePosition.x - f.bounds.origin.x, f.leftEyePosition.y - f.bounds.origin.y);
+                }
+
+                if (f.hasRightEyePosition) {
+                    faceLayer.rightEyeLayer.position = CGPointMake(f.rightEyePosition.x - f.bounds.origin.x, f.rightEyePosition.y - f.bounds.origin.y);
+                }
+
                 faceLayer.hidden = NO;
                 
             }
