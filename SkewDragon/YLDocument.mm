@@ -159,6 +159,9 @@ NSString* const YLMouseUpNotification = @"YLMouseUpNotification";
 
 - (BOOL) readFromURL: (NSURL *)url ofType: (NSString *)typeName error: (NSError *__autoreleasing *)outError
 {
+#define REPLACE_MUSIC
+    
+#ifdef REPLACE_MUSIC
     AVMutableComposition *composition = [AVMutableComposition composition];
     AVURLAsset* videoAsset = [[AVURLAsset alloc] initWithURL: url options: nil];
     
@@ -170,16 +173,9 @@ NSString* const YLMouseUpNotification = @"YLMouseUpNotification";
                                     atTime:kCMTimeZero
                                      error:&error];
     
-//    NSMutableArray *allAudio = [[NSMutableArray alloc]init];
-//    for (int i=1; i < [allAudioTracks count]; i++) {
     NSURL *audioURL = [[NSBundle mainBundle] URLForResource: @"kp" withExtension: @"mp3"];
     AVURLAsset* audioAsset = [[AVURLAsset alloc] initWithURL: audioURL options: nil];
-//        [allAudio addObject:audioAsset];
-//    }
-//
-//    for (int i=0; i < [allAudio count]; i++) {
     error = NULL;
-//        //audioAsset = [allAudio objectAtIndex:i];
 
     CMTime duration = (videoAsset.duration.value > audioAsset.duration.value) ? audioAsset.duration : videoAsset.duration;
     AVMutableCompositionTrack *compositionAudioTrack = [composition addMutableTrackWithMediaType: AVMediaTypeAudio preferredTrackID:kCMPersistentTrackID_Invalid];
@@ -187,13 +183,9 @@ NSString* const YLMouseUpNotification = @"YLMouseUpNotification";
                                    ofTrack: [[audioAsset tracksWithMediaType: AVMediaTypeAudio] firstObject]
                                     atTime: kCMTimeZero
                                      error: &error];
-//
-//        NSLog(@"Error : %@", error);
-//        //[allCompositionTrack addObject:compositionAudioTrack];
-//        [audioAsset release];
-//    }
-    
-    
+#else
+    AVURLAsset* composition = [[AVURLAsset alloc] initWithURL: url options: nil];
+#endif
 	AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset: composition];
 	if (playerItem) {
 		[_player replaceCurrentItemWithPlayerItem: playerItem];

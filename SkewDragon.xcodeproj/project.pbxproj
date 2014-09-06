@@ -178,9 +178,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8531ECF41885823300CDDBD2 /* SkewDragon */ = {
+		8531ECF41885823300CDDBD2 /* KPlayer */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8531ED291885823300CDDBD2 /* Build configuration list for PBXNativeTarget "SkewDragon" */;
+			buildConfigurationList = 8531ED291885823300CDDBD2 /* Build configuration list for PBXNativeTarget "KPlayer" */;
 			buildPhases = (
 				8531ECF11885823300CDDBD2 /* Sources */,
 				8531ECF21885823300CDDBD2 /* Frameworks */,
@@ -190,7 +190,7 @@
 			);
 			dependencies = (
 			);
-			name = SkewDragon;
+			name = KPlayer;
 			productName = SkewDragon;
 			productReference = 8531ECF51885823300CDDBD2 /* SkewDragon.app */;
 			productType = "com.apple.product-type.application";
@@ -241,7 +241,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8531ECF41885823300CDDBD2 /* SkewDragon */,
+				8531ECF41885823300CDDBD2 /* KPlayer */,
 				8531ED181885823300CDDBD2 /* SkewDragonTests */,
 			);
 		};
@@ -297,7 +297,7 @@
 /* Begin PBXTargetDependency section */
 		8531ED1E1885823300CDDBD2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8531ECF41885823300CDDBD2 /* SkewDragon */;
+			target = 8531ECF41885823300CDDBD2 /* KPlayer */;
 			targetProxy = 8531ED1D1885823300CDDBD2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -494,7 +494,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8531ED291885823300CDDBD2 /* Build configuration list for PBXNativeTarget "SkewDragon" */ = {
+		8531ED291885823300CDDBD2 /* Build configuration list for PBXNativeTarget "KPlayer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8531ED2A1885823300CDDBD2 /* Debug */,

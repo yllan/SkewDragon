@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8531ECF41885823300CDDBD2"
                BuildableName = "SkewDragon.app"
-               BlueprintName = "SkewDragon"
+               BlueprintName = "KPlayer"
                ReferencedContainer = "container:SkewDragon.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -44,7 +44,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8531ECF41885823300CDDBD2"
             BuildableName = "SkewDragon.app"
-            BlueprintName = "SkewDragon"
+            BlueprintName = "KPlayer"
             ReferencedContainer = "container:SkewDragon.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -63,7 +63,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8531ECF41885823300CDDBD2"
             BuildableName = "SkewDragon.app"
-            BlueprintName = "SkewDragon"
+            BlueprintName = "KPlayer"
             ReferencedContainer = "container:SkewDragon.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -81,7 +81,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8531ECF41885823300CDDBD2"
             BuildableName = "SkewDragon.app"
-            BlueprintName = "SkewDragon"
+            BlueprintName = "KPlayer"
             ReferencedContainer = "container:SkewDragon.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
