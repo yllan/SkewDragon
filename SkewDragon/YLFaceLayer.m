@@ -17,7 +17,11 @@
         
         self.textLayer = [CATextLayer layer];
         self.textLayer.position = CGPointZero;
-        self.textLayer.foregroundColor = [NSColor greenColor].CGColor;
+        self.textLayer.foregroundColor = [NSColor whiteColor].CGColor;
+        self.textLayer.fontSize = 24;
+        self.textLayer.wrapped = YES;
+        self.textLayer.backgroundColor = [NSColor colorWithWhite: 0 alpha: 0.3].CGColor;
+        self.textLayer.alignmentMode = kCAAlignmentCenter;
         
         self.leftEyeLayer = [CALayer layer];
         self.leftEyeLayer.borderColor = [NSColor yellowColor].CGColor;

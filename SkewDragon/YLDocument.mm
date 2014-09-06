@@ -56,6 +56,7 @@ NSString* const YLMouseUpNotification = @"YLMouseUpNotification";
 @property (nonatomic, strong) CIDetector *detector;
 @property (nonatomic, strong) NSImage *faceImage;
 @property (nonatomic, strong) NSSet *displayingFaceIDs;
+@property (nonatomic, strong) NSArray *quotes;
 @end
 
 @implementation YLDocument
@@ -68,6 +69,40 @@ NSString* const YLMouseUpNotification = @"YLMouseUpNotification";
         [self addTimeObserverToPlayer];
         self.detector = [CIDetector detectorOfType: CIDetectorTypeFace context: nil options: @{CIDetectorAccuracy: CIDetectorAccuracyHigh, CIDetectorTracking: @YES}];
         self.faceImage = [NSImage imageNamed: @"kp"];
+        self.quotes = @[
+                        @"事實上，政府原來的GMP、CAS制度，現在通通都失靈。",
+                        @"先進節能城市",
+                        @"公車路線大調整",
+                        @"各單位各挖各補的結果就是破壞市容、影響道路安全。",
+                        @"安心生孩子，輕鬆養孩子",
+                        @"家醫制度",
+                        @"我絕對相信，台北市民對預算提出的能力，不會比市政府差！",
+                        @"所謂參與式預算，便是制度化地讓市民可以參與預算的提出跟審查，藉此達到市民對台北市政興利跟除弊的雙重目的。",
+                        @"接駁式服務",
+                        @"改變台北從文化開始",
+                        @"政府應當積極解決褓姆供應的問題，而非只是花錢的補助政策，然後讓人民自謀生路，這是懶惰的行政態度。",
+                        @"文化基金會應當是一個獨立、專業、多元的文化獎助機構，並不是市長跟企業家社交的機構。",
+                        @"文化政策諮詢審議會",
+                        @"派隻烏龜去送公文都比那個快！",
+                        @"海綿城市",
+                        @"真正落實十二年國教，必需打造均優質的高中職",
+                        @"笨蛋，問題不在工程，而在管理。",
+                        @"緊急救護",
+                        @"能源",
+                        @"自動體外電擊器AED",
+                        @"要讓經濟成長，用電零成長",
+                        @"要透過資源的公開透明，把文化還給文化人！",
+                        @"解救血汗計程車",
+                        @"課後及寒暑假照顧班",
+                        @"買不起，至少要讓市民住得起。",
+                        @"透過網路投票，全民當市長的理想可以實現！",
+                        @"道路統一挖補",
+                        @"銀髮照顧",
+                        @"開源",
+                        @"難道要像經濟學人說的，台灣的未來由街頭來決定嗎？",
+                        @"雨天儲水，晴天散熱",
+                        @"食品安全微笑標章"
+                        ];
     }
     return self;
 }
@@ -328,6 +363,8 @@ NSString* const YLMouseUpNotification = @"YLMouseUpNotification";
                 [faceLayers addObject: faceLayer];
                 faceLayer.hidden = YES;
             }
+        
+        CGFloat subtitleY = 0;
 
         if (features.count > 0) {
             NSInteger sublayersCount = [faceLayers count], currentSublayer = 0;
@@ -353,15 +390,14 @@ NSString* const YLMouseUpNotification = @"YLMouseUpNotification";
                 faceLayer.leftEyeLayer.hidden = YES;
                 faceLayer.rightEyeLayer.hidden = YES;
                 faceLayer.mouthLayer.hidden = YES;
-//                if (f.hasLeftEyePosition)
-//                    faceLayer.leftEyeLayer.position = CGPointMake(f.leftEyePosition.x - f.bounds.origin.x, f.leftEyePosition.y - f.bounds.origin.y);
-//                if (f.hasRightEyePosition)
-//                    faceLayer.rightEyeLayer.position = CGPointMake(f.rightEyePosition.x - f.bounds.origin.x, f.rightEyePosition.y - f.bounds.origin.y);
-//                if (f.hasMouthPosition)
-//                    faceLayer.mouthLayer.position = CGPointMake(f.mouthPosition.x - f.bounds.origin.x, f.mouthPosition.y - f.bounds.origin.y);
-//
-//                faceLayer.textLayer.string = [NSString stringWithFormat: @"ID: %d:%d", f.trackingID, f.trackingFrameCount];
-//                faceLayer.textLayer.bounds = faceLayer.bounds;
+
+                
+                faceLayer.textLayer.string = [NSString stringWithFormat: @"「%@」", self.quotes[f.trackingID % self.quotes.count]];
+                CGFloat lineHeight = self.playerView.frame.size.height / 10;
+                faceLayer.textLayer.frame = CGRectMake(-faceLayer.frame.origin.x, -faceLayer.frame.origin.y + subtitleY, self.playerView.frame.size.width, lineHeight);
+                faceLayer.textLayer.fontSize = lineHeight / 2;
+                subtitleY += lineHeight;
+                
                 faceLayer.hidden = NO;
                 
             }
