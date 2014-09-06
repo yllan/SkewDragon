@@ -20,6 +20,7 @@
 		8531ED241885823300CDDBD2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8531ED221885823300CDDBD2 /* InfoPlist.strings */; };
 		8531ED261885823300CDDBD2 /* SkewDragonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8531ED251885823300CDDBD2 /* SkewDragonTests.m */; };
 		8531ED31188582DD00CDDBD2 /* YLPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8531ED30188582DD00CDDBD2 /* YLPlayerView.m */; };
+		857219F719BAD5B900F12423 /* kp.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 857219F619BAD5B900F12423 /* kp.mp3 */; };
 		858F252C1887812600C9BC20 /* YLFaceLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 858F252B1887812600C9BC20 /* YLFaceLayer.m */; };
 		85EDA83E18859B68009F690C /* YLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 85EDA83D18859B68009F690C /* YLAppDelegate.m */; };
 /* End PBXBuildFile section */
@@ -57,6 +58,7 @@
 		8531ED251885823300CDDBD2 /* SkewDragonTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SkewDragonTests.m; sourceTree = "<group>"; };
 		8531ED2F188582DD00CDDBD2 /* YLPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLPlayerView.h; sourceTree = "<group>"; };
 		8531ED30188582DD00CDDBD2 /* YLPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLPlayerView.m; sourceTree = "<group>"; };
+		857219F619BAD5B900F12423 /* kp.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = kp.mp3; sourceTree = "<group>"; };
 		858F252A1887812600C9BC20 /* YLFaceLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLFaceLayer.h; sourceTree = "<group>"; };
 		858F252B1887812600C9BC20 /* YLFaceLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLFaceLayer.m; sourceTree = "<group>"; };
 		85EDA83C18859B68009F690C /* YLAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLAppDelegate.h; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 		8531ECFF1885823300CDDBD2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				857219F619BAD5B900F12423 /* kp.mp3 */,
 				8531ED001885823300CDDBD2 /* SkewDragon-Info.plist */,
 				8531ED011885823300CDDBD2 /* InfoPlist.strings */,
 				8531ED041885823300CDDBD2 /* main.m */,
@@ -254,6 +257,7 @@
 				8531ED0F1885823300CDDBD2 /* YLDocument.xib in Resources */,
 				8531ED091885823300CDDBD2 /* Credits.rtf in Resources */,
 				8531ED121885823300CDDBD2 /* MainMenu.xib in Resources */,
+				857219F719BAD5B900F12423 /* kp.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
