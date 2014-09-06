@@ -395,7 +395,7 @@ NSString* const YLMouseUpNotification = @"YLMouseUpNotification";
                 faceLayer.textLayer.string = [NSString stringWithFormat: @"「%@」", self.quotes[f.trackingID % self.quotes.count]];
                 CGFloat lineHeight = self.playerView.frame.size.height / 10;
                 faceLayer.textLayer.frame = CGRectMake(-faceLayer.frame.origin.x, -faceLayer.frame.origin.y + subtitleY, self.playerView.frame.size.width, lineHeight);
-                faceLayer.textLayer.fontSize = lineHeight / 2;
+                faceLayer.textLayer.fontSize = lineHeight / 2.2;
                 subtitleY += lineHeight;
                 
                 faceLayer.hidden = NO;
