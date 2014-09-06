@@ -54,7 +54,7 @@ NSString* const YLMouseUpNotification = @"YLMouseUpNotification";
 	id _observer;
 }
 @property (nonatomic, strong) CIDetector *detector;
-@property (nonatomic, strong) NSImage *faceImage;
+@property (nonatomic, strong) NSArray *faceImages;
 @property (nonatomic, strong) NSSet *displayingFaceIDs;
 @property (nonatomic, strong) NSArray *quotes;
 @end
@@ -68,7 +68,7 @@ NSString* const YLMouseUpNotification = @"YLMouseUpNotification";
         _player = [[AVPlayer alloc] init];
         [self addTimeObserverToPlayer];
         self.detector = [CIDetector detectorOfType: CIDetectorTypeFace context: nil options: @{CIDetectorAccuracy: CIDetectorAccuracyHigh, CIDetectorTracking: @YES}];
-        self.faceImage = [NSImage imageNamed: @"kp"];
+        self.faceImages = @[[NSImage imageNamed: @"kp"], [NSImage imageNamed: @"kp2"], [NSImage imageNamed: @"kp3"], [NSImage imageNamed: @"kp4"], [NSImage imageNamed: @"kp5"]];
         self.quotes = @[
                         @"事實上，政府原來的GMP、CAS制度，現在通通都失靈。",
                         @"先進節能城市",
@@ -373,7 +373,6 @@ NSString* const YLMouseUpNotification = @"YLMouseUpNotification";
                 layer.name = @"FaceLayer";
 //                layer.borderColor = [NSColor redColor].CGColor;
 //                layer.borderWidth = 1;
-                layer.contents= self.faceImage;
                 
                 [self.playerView.layer addSublayer: layer];
                 [faceLayers addObject: layer];
@@ -383,6 +382,8 @@ NSString* const YLMouseUpNotification = @"YLMouseUpNotification";
                 YLFaceLayer *faceLayer = [faceLayers objectAtIndex: currentSublayer++];
                 
                 faceLayer.frame = [self transformRect: f.bounds inSize: imageSize];
+                faceLayer.contents= self.faceImages[f.trackingID % self.faceImages.count];
+
 //                faceLayer.leftEyeLayer.hidden = !f.hasLeftEyePosition;
 //                faceLayer.rightEyeLayer.hidden = !f.hasRightEyePosition;
 //                faceLayer.mouthLayer.hidden = !f.hasMouthPosition;
