@@ -54,7 +54,7 @@ NSString* const YLMouseUpNotification = @"YLMouseUpNotification";
 	id _observer;
 }
 @property (nonatomic, strong) CIDetector *detector;
-
+@property (nonatomic, strong) NSImage *faceImage;
 @property (nonatomic, strong) NSSet *displayingFaceIDs;
 @end
 
@@ -67,6 +67,7 @@ NSString* const YLMouseUpNotification = @"YLMouseUpNotification";
         _player = [[AVPlayer alloc] init];
         [self addTimeObserverToPlayer];
         self.detector = [CIDetector detectorOfType: CIDetectorTypeFace context: nil options: @{CIDetectorAccuracy: CIDetectorAccuracyHigh, CIDetectorTracking: @YES}];
+        self.faceImage = [NSImage imageNamed: @"kp"];
     }
     return self;
 }
@@ -233,11 +234,36 @@ NSString* const YLMouseUpNotification = @"YLMouseUpNotification";
 	[(NSButton *)sender setTitle: ([_player rate] == 0.0f ? @"Play" : @"Pause")];
 }
 
+- (CGRect) transformRect: (CGRect)rect inSize: (CGSize)inSize
+{
+    CGPoint baseOffset = CGPointZero;
+    CGSize scaledSize = CGSizeZero;
+    CGFloat ratio = 0;
+    if (self.playerView.frame.size.width / self.playerView.frame.size.height >= inSize.width / inSize.height) {
+        scaledSize.width = inSize.width * self.playerView.frame.size.height / inSize.height;
+        scaledSize.height = self.playerView.frame.size.height;
+        ratio = self.playerView.frame.size.height / inSize.height;
+    } else {
+        scaledSize.width = self.playerView.frame.size.width;
+        scaledSize.height = inSize.height * self.playerView.frame.size.width / inSize.width;
+        ratio = self.playerView.frame.size.width / inSize.width;
+    }
+    baseOffset = CGPointMake((self.playerView.frame.size.width - scaledSize.width) / 2, (self.playerView.frame.size.height - scaledSize.height) / 2);
+    
+    
+    return CGRectMake(baseOffset.x + rect.origin.x * ratio, baseOffset.y + rect.origin.y * ratio, rect.size.width * ratio, rect.size.height * ratio);
+}
+
 #pragma mark - Player View Delegate
 - (void) displayPixelBuffer: (CVPixelBufferRef)pixelBuffer atTime: (CMTime)outputTime
 {
     @autoreleasepool {
         CIImage *image = [[CIImage alloc] initWithCVImageBuffer: pixelBuffer];
+        
+        size_t imageWidth = CVPixelBufferGetWidth(pixelBuffer);
+        size_t imageHeight = CVPixelBufferGetHeight(pixelBuffer);
+        CGSize imageSize = CGSizeMake(imageWidth, imageHeight);
+        
         NSArray *features = [self.detector featuresInImage: image];
 
         NSMutableSet *newFaceIDs = [NSMutableSet set];
@@ -273,9 +299,9 @@ NSString* const YLMouseUpNotification = @"YLMouseUpNotification";
             for (NSUInteger idx = sublayersCount; idx < features.count; idx++) {
                 YLFaceLayer *layer = [YLFaceLayer layer];
                 layer.name = @"FaceLayer";
-                layer.borderColor = [NSColor redColor].CGColor;
-                layer.borderWidth = 1;
-//                layer.contents = self.faceImage;
+//                layer.borderColor = [NSColor redColor].CGColor;
+//                layer.borderWidth = 1;
+                layer.contents= self.faceImage;
                 
                 [self.playerView.layer addSublayer: layer];
                 [faceLayers addObject: layer];
@@ -283,20 +309,24 @@ NSString* const YLMouseUpNotification = @"YLMouseUpNotification";
             
             for (CIFaceFeature *f in features) {
                 YLFaceLayer *faceLayer = [faceLayers objectAtIndex: currentSublayer++];
-                faceLayer.frame = f.bounds;
-                faceLayer.leftEyeLayer.hidden = !f.hasLeftEyePosition;
-                faceLayer.rightEyeLayer.hidden = !f.hasRightEyePosition;
-                faceLayer.mouthLayer.hidden = !f.hasMouthPosition;
+                
+                faceLayer.frame = [self transformRect: f.bounds inSize: imageSize];
+//                faceLayer.leftEyeLayer.hidden = !f.hasLeftEyePosition;
+//                faceLayer.rightEyeLayer.hidden = !f.hasRightEyePosition;
+//                faceLayer.mouthLayer.hidden = !f.hasMouthPosition;
 
-                if (f.hasLeftEyePosition)
-                    faceLayer.leftEyeLayer.position = CGPointMake(f.leftEyePosition.x - f.bounds.origin.x, f.leftEyePosition.y - f.bounds.origin.y);
-                if (f.hasRightEyePosition)
-                    faceLayer.rightEyeLayer.position = CGPointMake(f.rightEyePosition.x - f.bounds.origin.x, f.rightEyePosition.y - f.bounds.origin.y);
-                if (f.hasMouthPosition)
-                    faceLayer.mouthLayer.position = CGPointMake(f.mouthPosition.x - f.bounds.origin.x, f.mouthPosition.y - f.bounds.origin.y);
-
-                faceLayer.textLayer.string = [NSString stringWithFormat: @"ID: %d:%d", f.trackingID, f.trackingFrameCount];
-                faceLayer.textLayer.bounds = faceLayer.bounds;
+                faceLayer.leftEyeLayer.hidden = YES;
+                faceLayer.rightEyeLayer.hidden = YES;
+                faceLayer.mouthLayer.hidden = YES;
+//                if (f.hasLeftEyePosition)
+//                    faceLayer.leftEyeLayer.position = CGPointMake(f.leftEyePosition.x - f.bounds.origin.x, f.leftEyePosition.y - f.bounds.origin.y);
+//                if (f.hasRightEyePosition)
+//                    faceLayer.rightEyeLayer.position = CGPointMake(f.rightEyePosition.x - f.bounds.origin.x, f.rightEyePosition.y - f.bounds.origin.y);
+//                if (f.hasMouthPosition)
+//                    faceLayer.mouthLayer.position = CGPointMake(f.mouthPosition.x - f.bounds.origin.x, f.mouthPosition.y - f.bounds.origin.y);
+//
+//                faceLayer.textLayer.string = [NSString stringWithFormat: @"ID: %d:%d", f.trackingID, f.trackingFrameCount];
+//                faceLayer.textLayer.bounds = faceLayer.bounds;
                 faceLayer.hidden = NO;
                 
             }

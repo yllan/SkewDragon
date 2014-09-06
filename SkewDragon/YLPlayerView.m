@@ -22,7 +22,6 @@
 	dispatch_queue_t _queue;
 }
 @property (nonatomic, strong) AVPlayerItemVideoOutput *playerItemVideoOutput;
-@property (nonatomic, strong) NSImage *faceImage;
 @end
 
 @interface YLPlayerView (AVPlayerItemOutputPullDelegate) <AVPlayerItemOutputPullDelegate>
@@ -60,7 +59,6 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 		[self setWantsLayer: YES];
         
         self.detector = [CIDetector detectorOfType: CIDetectorTypeFace context: nil options: @{CIDetectorAccuracy: CIDetectorAccuracyHigh, CIDetectorTracking: @YES}];
-        self.faceImage = [NSImage imageNamed: @"face.png"];
     }
     return self;
 }
